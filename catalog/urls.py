@@ -1,3 +1,6 @@
 from django.conf.urls import include, url
-
-urlpatterns = []
+from . import views
+app_name = 'catalog'
+urlpatterns = [
+    url('^s' ,  views.index , name = 'index'),
+]
