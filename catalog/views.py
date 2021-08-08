@@ -4,8 +4,8 @@ from . import models
 def index(request) :
     num_books = models.Book.objects.all().count()
     num_instances = models.BookInstance.objects.all().count()
-    num_intances_available = models.BookInstance.objects.filter(LOAN_STATUS = 'a' ).count()
-    num_authors = models.Athour.objects.count()
+    num_intances_available = models.BookInstance.objects.filter(status__exact = 'a' ).count()
+    num_authors = models.Author.objects.count()
 
     return render(request,'catalog/index.html',
         context = {

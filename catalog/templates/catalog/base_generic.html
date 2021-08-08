@@ -1,5 +1,5 @@
-<<!DOCTYPE html>
-<<!DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="en" dir="ltr">
   <head>
     {%block title %}<title>Local Library</title> {% endblock%}
@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstarpcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
     {% load static%}
-    <<link rel="stylesheet" href="{%static 'catalog/style.css'%}">
+    <link rel="stylesheet" href="{%static 'catalog/style.css'%}">
   </head>
   <body>
     <div class="countainer-fluid">
@@ -18,9 +18,10 @@
         <div class="col-sm-2">
           {%block sidebar%}
           <ul class="sidebar-nav">
-            <li><a href="{%url catalog:index%}">Hmoe</a></li>
+            <li><a href="{%url 'catalog:index'%}">Home</a></li>
             <li><a href="#">Books</a></li>
             <li><a href="#">Athour</a></li>
+            <li><a href="/admin/">Admin Page</a></li>
           </ul>
           {%endblock%}
         </div>
@@ -30,4 +31,4 @@
       </div>
     </div>
   </body>
-</html> lang="en">
+</html>
