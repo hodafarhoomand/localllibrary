@@ -35,3 +35,15 @@ class BookInstance(models.Models) :
         ordering = ['due_back']
     def __str__(self):
         return '%s (%s)' % (self.id , self.book.title)
+
+class Author(models.Model):
+    first_name = models.Charfield(max_lenth = 100)
+    last_name = models.Charfield(max_lenth = 100)
+    date_of_birth = models.DateField(null = True , blank = True)
+    date_of_death = models.DateField('Died' , null = True , blank = True)
+
+    def get_absolute_url (self) :
+        return reverse('Athour-detail' , args=[str(self.id)])
+
+    def __str__(self) :
+        return '%s %S' % (self.last_name , self.first_name)
