@@ -19,4 +19,19 @@ class Genre(models.Model):
                 return self.title
                 def get_absolute_url():
                     return reverse('book-detail' , args=[str(self.id)])
-class 
+class BookInstance(models.Models) :
+    id = models.UUIDField(primary_key = True, default = uuid.uuid4)
+    book = models.ForeigKey('Book',on_delete=models.SET_NULL ,null=True)
+    imprint = models.CharField(max_length = 200)
+    due_back = models.DateField(null = True , Blank = True)
+    LOAN_STATUS = (
+        ('m' , 'maintenance'),
+        ('o', 'on loan'),
+        ('a', 'available'),
+        ('r', 'reseved')
+    )
+    status = models.Charfield(max_length =1 ,choices = LOAN_STATUS , blank = True)
+    class Meta:
+        ordering = ['due_back']
+    def __str__(self):
+        return '%s (%s)' % (self.id , self.book.title)
