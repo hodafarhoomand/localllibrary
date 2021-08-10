@@ -1,12 +1,12 @@
 {% extends "catalog/base_generic.html" %}
 {% block content %}
-  <h1>Book List </h1>
-  {% if book_list %}
+  <h1>Author List </h1>
+  {% if author_list %}
   <!-- context of BookListView() is book_list by default -->
     <ul>
-      {% for book in book_list %}
+      {% for author in author_list %}
         <li>
-          <a href="{{book.get_absolute_url}}">{{book.title}}</a>({{book.athour}})
+          {{author.last_name}} _ {{author.first_name}} ({{author.date_of_birth}} to {{author.date_of_death}})
         </li>
       {% endfor %}
     </ul>

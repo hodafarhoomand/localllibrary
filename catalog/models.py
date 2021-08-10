@@ -10,14 +10,14 @@ class Genre(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length = 200)
-    athour = models.ForeignKey('Author', on_delete=models.SET_NULL ,null=True)
+    athour = models.ForeignKey('Author', on_delete = models.SET_NULL ,null=True)
     summary = models.TextField(max_length = 1000 )
     isbn = models.CharField('ISBN' , max_length = 13)
     genre =models.ManyToManyField('Genre')
 
     def __str__(self):
         return self.title
-    def get_absolute_url():
+    def get_absolute_url(self):
         return reverse('catalog:book-detail' , args=[str(self.id)])
     def display_genre(self):
         return ', '.join([genre.name for genre in self.genre.all()[:3]])
