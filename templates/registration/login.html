@@ -3,14 +3,14 @@
   {%  if form.errors %}
     <p> your username or password doese not match. please try again  </p>
   {% endif %}
-  {% if next % }
+
       {% if user.is_authenticated %}
         <p>your account doese not have acccess
              please login with an valid account</p>
       {% else %}
         <p>please login</p>
       {% endif %}
-  {% endif %}
+
 
     <form   method="post" action="{% url 'login' %}">
     {% csrf_token %}
