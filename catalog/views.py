@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 from . import models
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class Index(generic.TemplateView) :
     template_name = 'catalog/index.html'
@@ -25,6 +25,19 @@ class BookDetailView(generic.DetailView) :
 class AuthorListView(generic.ListView):
     model = models.Author
     template_name = 'catalog/author_list.html'
+
+# class MyView(LoginRequiredMixin,view):
+#     login_url = '/login/'
+#     required_field_name ='redirect_to'
+
+class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
+    model = models.BookInstance
+    template_name = 'catalog/bookninstance_list_borrowed_user.html'
+    pegindate_by = 10
+    #how many records must be in each page as reault
+    def get_queryset(self):
+        return models.BookInstance.objects.filter(borrower=self.request.user).filter(status__exact = 'o').order_by('due_back')
+
 # def index(request) :
 #     num_books = models.Book.objects.all().count()
 #     num_instances = models.BookInstance.objects.all().count()

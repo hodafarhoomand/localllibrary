@@ -3,10 +3,10 @@ from . import models
 
 @admin.register(models.BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_filter = ('status','due_back')
+    list_filter = ('status','due_back','borrower')
     fieldsets =(
         (None,{ 'fields' : ('book' , 'imprint', 'id') }) ,
-        ('availability' , {'fields' : ('status' , 'due_back')})
+        ('availability' , {'fields' : ('status' , 'due_back','borrower')})
     )
 
 class BookInstanceInline(admin.TabularInline):
