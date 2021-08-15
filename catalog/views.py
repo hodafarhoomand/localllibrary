@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render , get_objects_or_404
 from django.views import generic
 from . import models
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponeRedirect
+from django.core.urlresolvers import reverse
+import datetime
+from .forms import RenewBookForm
 
 class Index(generic.TemplateView) :
     template_name = 'catalog/index.html'
@@ -37,6 +41,23 @@ class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
     #how many records must be in each page as reault
     def get_queryset(self):
         return models.BookInstance.objects.filter(borrower=self.request.user).filter(status__exact = 'o').order_by('due_back')
+
+
+@permission_required('catalog.can_mark_returned')
+def renew_book_linrarian(request,pk):
+    book_inst = get_objects_or_404(BookInstance , pk = pk)
+    if request.method == 'POST':
+        form = RenewBookForm(request.POST)
+        if form.is_valid():
+            book_inst.due_back = FORM.cleaned_data['renewal_date']
+            book_inst.save()
+            return HttpResponeRedirect(reverse('all_borrowd'))
+    else:
+        proposed_renewal_date = date.datetime.today() + datetime.timedelta(weeks = 3)
+        form = RenewBookForm(initial={'renewal_date' : proposed_renewal_date})
+    return render (request , 'catalog/book_renew_librarian.html' ,
+                    {'form' = form , 'bookinst' = book_inst})
+
 
 # def index(request) :
 #     num_books = models.Book.objects.all().count()
