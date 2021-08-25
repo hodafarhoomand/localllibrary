@@ -22,7 +22,7 @@
             <li><a href="{%url 'catalog:books'%}">Books</a></li>
             <li><a href="{%url 'catalog:authors'%}">Athour</a></li>
             <li><a href="/admin/">Admin Page</a></li>
-            <li><a href="{% url 'catalog:my-borrowed' %}">My Borrowed</a></li>
+            <li><a href="{% url 'catalog:all_borrowd' %}">My Borrowed</a></li>
             {% if user.is_authenticated %}
             <li>User : {{user.get_username}}</li>
             <li><a href="{% url 'logout'%}?next={{request.path}}">logout</a></li>

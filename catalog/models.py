@@ -40,6 +40,7 @@ class BookInstance(models.Model) :
     borrower = models.ForeignKey(User,on_delete =models.SET_NULL,null=True ,blank=True)
     class Meta:
         ordering = ['due_back']
+        permissions = (("can_mark_returned" , "set book as a return"),)
     def __str__(self):
         return '%s (%s)' % (self.id , self.book.title)
 
@@ -56,7 +57,7 @@ class Author(models.Model):
     date_of_death = models.DateField('Died' , null = True , blank = True)
 
     def get_absolute_url (self) :
-        return reverse('catalog:Athour-detail' , args=[str(self.id)])
+        return reverse('catalog:author-detail' , args=[str(self.id)])
 
     def __str__(self) :
         return '%s %s' % (self.last_name , self.first_name)
